@@ -58,10 +58,12 @@ const cardsContainer = document.querySelector('.cards-container');
 axios.get(articleInfoAPI)
 .then(successData => {
     const articleNames = Object.keys(successData.data.articles);
-    articleNames.forEach(x => successData.data.articles[x].forEach(y => cardsContainer.appendChild(articleCreator(y))));
+    articleNames.forEach(x => successData.data.articles[x].forEach(y => {let newCard = articleCreator(y); newCard.classList.add(`${x}`); cardsContainer.appendChild(newCard)}));
 })
-.catch(() => {
+.catch(() => {// STRETCH GOAL, ERROR MESSAGE IF DATA ISN'T RETURNED
     const errorMessage = document.createElement('h2');
+    const errorsContainer = document.querySelector('.errors-container')
         errorMessage.textContent = "We apologize, this webpage is experiencing difficulties. Please come back later.";
-    cardsContainer.appendChild(errorMessage);
+    errorsContainer.appendChild(errorMessage);
 });
+
