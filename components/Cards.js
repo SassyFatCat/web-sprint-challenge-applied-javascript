@@ -60,4 +60,8 @@ axios.get(articleInfoAPI)
     const articleNames = Object.keys(successData.data.articles);
     articleNames.forEach(x => successData.data.articles[x].forEach(y => cardsContainer.appendChild(articleCreator(y))));
 })
-.catch(failData => {console.log('failed'); console.log(failData)});
+.catch(() => {
+    const errorMessage = document.createElement('h2');
+        errorMessage.textContent = "We apologize, this webpage is experiencing difficulties. Please come back later.";
+    cardsContainer.appendChild(errorMessage);
+});
